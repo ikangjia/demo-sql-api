@@ -1,0 +1,12 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: demo-sql-api
+  profiles:
+    active: pc
+
+mybatis-plus:
+  global-config:
+    banner: off
