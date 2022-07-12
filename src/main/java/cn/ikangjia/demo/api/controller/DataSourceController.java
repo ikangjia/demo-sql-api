@@ -51,7 +51,7 @@ public class DataSourceController {
     }
 
     @GetMapping
-    public ResultVO<DataSourceListDTO> listDataSources(@RequestBody DataSourceQuery dataSourceQuery) {
+    public ResultVO<DataSourceListDTO> listDataSources(DataSourceQuery dataSourceQuery) {
         return Optional.of(dataSourceService.listDataSources(dataSourceQuery))
                 .map(ResultVO::success)
                 .orElseThrow();
