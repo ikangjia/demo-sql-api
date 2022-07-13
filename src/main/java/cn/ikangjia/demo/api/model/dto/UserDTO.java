@@ -27,4 +27,6 @@ public class UserDTO {
     private LocalDateTime updateTime;
 
     private boolean deleted;
+
+    private String token;
 }

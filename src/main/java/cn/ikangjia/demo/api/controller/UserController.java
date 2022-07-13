@@ -6,6 +6,7 @@ import cn.ikangjia.demo.api.rest.ResultVO;
 import cn.ikangjia.demo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
@@ -40,6 +41,13 @@ public class UserController {
     @GetMapping("/{id}")
     public ResultVO<UserDTO> getUser(@PathVariable Long id) {
         return Optional.of(userService.getUser(id))
+                .map(ResultVO::success)
+                .orElseThrow();
+    }
+    @GetMapping("/x")
+    public ResultVO<UserDTO> getUserByToken(HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        return Optional.of(userService.getUserByToken(token))
                 .map(ResultVO::success)
                 .orElseThrow();
     }

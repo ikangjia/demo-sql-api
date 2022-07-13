@@ -5,14 +5,19 @@ import cn.ikangjia.demo.api.model.dto.UserLoginDTO;
 import cn.ikangjia.demo.domain.entity.UserDO;
 import cn.ikangjia.demo.domain.mapper.UserMapper;
 import cn.ikangjia.demo.infra.exception.BusinessException;
+import cn.ikangjia.demo.infra.util.JWTUtil;
 import cn.ikangjia.demo.service.UserService;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author kangJia
@@ -54,6 +59,12 @@ public class UserServiceImpl implements UserService {
 
         UserDTO result = new UserDTO();
         BeanUtils.copyProperties(userDOList.get(0), result);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("id", String.valueOf(result.getId()));
+        String token = JWTUtil.generateToken(map);
+        result.setToken(token);
+
         return result;
     }
 
@@ -71,5 +82,11 @@ public class UserServiceImpl implements UserService {
         UserDTO result = new UserDTO();
         BeanUtils.copyProperties(userDO, result);
         return result;
+    }
+
+    @Override
+    public UserDTO getUserByToken(String token) {
+        Long id = JWTUtil.getUserIdByToken(token);
+        return this.getUser(id);
     }
 }

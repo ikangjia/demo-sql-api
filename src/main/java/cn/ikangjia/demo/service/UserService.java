@@ -34,4 +34,5 @@ public interface UserService {
      */
     UserDTO getUser(Long id);
 
+    UserDTO getUserByToken(String token);
 }
