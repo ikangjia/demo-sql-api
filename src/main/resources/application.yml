@@ -10,3 +10,11 @@ spring:
 mybatis-plus:
   global-config:
     banner: off
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+logging:
+  level:
+    cn.ikangjia.demo.domain.mapper: debug

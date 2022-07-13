@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @Component
-public class AutoFieldFillHandler implements MetaObjectHandler {
+public class FieldAutoFillHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
