@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
         } else if (userDOList.size() < 1) {
             throw new BusinessException("用户名或密码错误");
         }
+
         UserDTO result = new UserDTO();
         BeanUtils.copyProperties(userDOList.get(0), result);
         return result;
