@@ -2,6 +2,7 @@ package cn.ikangjia.demo.service;
 
 import cn.ikangjia.demo.api.model.dto.UserDTO;
 import cn.ikangjia.demo.api.model.dto.UserLoginDTO;
+import com.google.code.kaptcha.impl.DefaultKaptcha;
 
 /**
  * @author kangJia
@@ -9,6 +10,8 @@ import cn.ikangjia.demo.api.model.dto.UserLoginDTO;
  * @since 2022/7/8 17:06
  */
 public interface UserService {
+
+    DefaultKaptcha getCaptcha();
 
     /**
      * 登录

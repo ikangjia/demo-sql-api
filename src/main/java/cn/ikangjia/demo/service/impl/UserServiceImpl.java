@@ -9,6 +9,8 @@ import cn.ikangjia.demo.infra.util.JWTUtil;
 import cn.ikangjia.demo.service.UserService;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.google.code.kaptcha.util.Config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author kangJia
@@ -36,13 +39,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public DefaultKaptcha getCaptcha() {
+        Properties properties = new Properties();
+        properties.put("kaptcha.border", "no");
+        properties.put("kaptcha.textproducer.font.color", "black");
+        properties.put("kaptcha.textproducer.char.space", "5");
+        properties.put("kaptcha.textproducer.char.string", "123456788");
+        properties.put("kaptcha.textproducer.char.length", "4");
+        Config config = new Config(properties);
+        DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
+        defaultKaptcha.setConfig(config);
+        return defaultKaptcha;
+    }
+
+    @Override
     public UserDTO doLogin(UserLoginDTO userLoginDTO) {
-        String code = userLoginDTO.getCode();
-
-        if (!"1234".equals(code)) {
-            throw new BusinessException("验证码错误");
-        }
-
         String account = userLoginDTO.getAccount();
         String password = userLoginDTO.getPassword();
         LambdaQueryWrapper<UserDO> wrapper = new LambdaQueryWrapper<>();
