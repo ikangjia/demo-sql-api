@@ -1,4 +1,4 @@
-package cn.ikangjia.demo.sql.datasource;
+package cn.ikangjia.demo.core.datasource;
 
 import cn.ikangjia.demo.domain.entity.DataSourceDO;
 

@@ -1,4 +1,4 @@
-package cn.ikangjia.demo.sql.exception;
+package cn.ikangjia.demo.core.exception;
 
 /**
  * @author kangJia

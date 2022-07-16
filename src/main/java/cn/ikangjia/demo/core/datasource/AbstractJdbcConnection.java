@@ -1,7 +1,7 @@
-package cn.ikangjia.demo.sql.datasource;
+package cn.ikangjia.demo.core.datasource;
 
 import cn.ikangjia.demo.domain.entity.DataSourceDO;
-import cn.ikangjia.demo.sql.exception.DMSException;
+import cn.ikangjia.demo.core.exception.DMSException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
