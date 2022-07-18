@@ -1,26 +1,23 @@
-package cn.ikangjia.demo.manager;
+package cn.ikangjia.demo.service;
 
+import cn.ikangjia.demo.api.model.vo.TreeVO;
 import cn.ikangjia.demo.core.entity.DatabaseEntity;
 
 import java.util.List;
 
 /**
- * 数据库管理接口类
- *
  * @author kangjia
  * @email ikangjia.cn@outlook.com
- * @since 2022/7/16 11:59
+ * @since 2022/7/18 16:21
  */
-public interface DatabaseManager {
+public interface DatabaseService {
+    List<TreeVO> listDatabases(Long dataSourceId);
 
-    List<DatabaseEntity> findDatabases(Long dataSourceId);
-
-    String findDatabaseCreate(Long dataSourceId, String dbName);
+    String getDatabaseCreate(Long dataSourceId, String dbName);
 
     boolean createDatabase(Long dataSourceId, DatabaseEntity databaseEntity);
 
     boolean dropDatabase(Long dataSourceId, String dbName, boolean judgeExistence);
 
     boolean alterDatabase(Long dataSourceId, DatabaseEntity databaseEntity);
-
 }

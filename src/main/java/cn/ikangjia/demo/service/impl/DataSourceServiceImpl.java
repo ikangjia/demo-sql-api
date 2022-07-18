@@ -3,10 +3,11 @@ package cn.ikangjia.demo.service.impl;
 import cn.ikangjia.demo.api.model.dto.DataSourceDTO;
 import cn.ikangjia.demo.api.model.dto.DataSourceListDTO;
 import cn.ikangjia.demo.api.model.dto.DataSourceQuery;
+import cn.ikangjia.demo.core.DbUtil;
+import cn.ikangjia.demo.core.entity.DataSourceEntity;
 import cn.ikangjia.demo.domain.entity.DataSourceDO;
 import cn.ikangjia.demo.domain.mapper.DataSourceMapper;
 import cn.ikangjia.demo.service.DataSourceService;
-import cn.ikangjia.demo.core.datasource.AbstractJdbcConnection;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -96,18 +97,9 @@ public class DataSourceServiceImpl implements DataSourceService {
 
     @Override
     public boolean testConnection(DataSourceDTO dataSourceDTO) {
-        DataSourceDO dataSourceDO = new DataSourceDO();
-        BeanUtils.copyProperties(dataSourceDTO, dataSourceDO);
-        int type = dataSourceDTO.getType();
-        AbstractJdbcConnection jdbcConnection = new AbstractJdbcConnection();
+        DataSourceEntity dataSourceEntity = new DataSourceEntity();
+        BeanUtils.copyProperties(dataSourceDTO, dataSourceEntity);
 
-        switch (type) {
-            case 0:
-                // mysql
-                return jdbcConnection.testConnection(dataSourceDO);
-            default:
-                break;
-        }
-        return false;
+        return DbUtil.testConnection(dataSourceEntity);
     }
 }
