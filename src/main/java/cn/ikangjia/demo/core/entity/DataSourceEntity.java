@@ -16,4 +16,6 @@ public class DataSourceEntity {
     private String host;
     private String username;
     private String password;
+
+    private String dbName;
 }

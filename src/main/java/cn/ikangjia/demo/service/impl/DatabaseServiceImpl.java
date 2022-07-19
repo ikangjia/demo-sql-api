@@ -1,5 +1,6 @@
 package cn.ikangjia.demo.service.impl;
 
+import cn.ikangjia.demo.api.model.dto.TreeLevel3DTO;
 import cn.ikangjia.demo.api.model.vo.TreeVO;
 import cn.ikangjia.demo.core.entity.DataSourceEntity;
 import cn.ikangjia.demo.core.entity.DatabaseEntity;
@@ -30,9 +31,27 @@ public class DatabaseServiceImpl implements DatabaseService {
     @Override
     public List<TreeVO> listDatabases(Long dataSourceId) {
         List<DatabaseEntity> entityList = MySQLDatabaseUtil.listDatabases(init(dataSourceId));
-        return TreeUtil.TreeLevel1(entityList.stream()
+        return TreeUtil.getTreeLevel1(entityList.stream()
                 .map(DatabaseEntity::getDbName)
                 .collect(Collectors.toList()));
+    }
+
+    @Override
+    public List<TreeVO> listTreeLevel2(TreeVO parentNode) {
+        return TreeUtil.getTreeLevel2(parentNode);
+    }
+
+    @Override
+    public List<TreeVO> listTreeLevel3(TreeLevel3DTO level3DTO) {
+        String dataSourceId = level3DTO.getDataSourceId();
+        TreeVO rootNode = level3DTO.getRootNode();
+        TreeVO parentNode = level3DTO.getParentNode();
+        Integer type = level3DTO.getType();
+
+        DataSourceEntity dataSourceEntity = init(Long.valueOf(dataSourceId));
+
+
+        return null;
     }
 
     @Override

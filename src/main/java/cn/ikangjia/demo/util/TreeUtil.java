@@ -42,7 +42,7 @@ public class TreeUtil {
      * @param dbNameList 数据库名称列表
      * @return 结果
      */
-    public static List<TreeVO> TreeLevel1(List<String> dbNameList) {
+    public static List<TreeVO> getTreeLevel1(List<String> dbNameList) {
         List<TreeVO> result = new ArrayList<>();
         dbNameList.forEach(dbName -> {
             TreeVO treeVO = new TreeVO();
@@ -62,7 +62,7 @@ public class TreeUtil {
      * @param parent 父级
      * @return 结果
      */
-    public static List<TreeVO> TreeLevel2(TreeVO parent) {
+    public static List<TreeVO> getTreeLevel2(TreeVO parent) {
         List<TreeVO> result = new ArrayList<>();
         TreeVO tablesTreeVO = new TreeVO();
         tablesTreeVO.setParentId(parent.getId())
@@ -105,7 +105,7 @@ public class TreeUtil {
      * @param tableNameList 表名称列表
      * @return 结果
      */
-    public static List<TreeVO> TreeLevel3Tables(List<String> tableNameList, TreeVO parent, TreeVO root) {
+    public static List<TreeVO> getTreeLevel3Tables(List<String> tableNameList, TreeVO parent, TreeVO root) {
         return getTreeVOLevel3(tableNameList, parent, root, LEVEL_3_TABLE_ID);
     }
 
@@ -115,7 +115,7 @@ public class TreeUtil {
      * @param viewNameList 视图名称列表
      * @return 结果
      */
-    public static List<TreeVO> TreeLevel3Views(List<String> viewNameList, TreeVO parent, TreeVO root) {
+    public static List<TreeVO> getTreeLevel3Views(List<String> viewNameList, TreeVO parent, TreeVO root) {
         return getTreeVOLevel3(viewNameList, parent, root, LEVEL_3_VIEW_ID);
     }
 
@@ -125,7 +125,7 @@ public class TreeUtil {
      * @param procedureNameList 存储过程名称列表
      * @return 结果
      */
-    public static List<TreeVO> TreeLevel3Procedures(List<String> procedureNameList, TreeVO parent, TreeVO root) {
+    public static List<TreeVO> getTreeLevel3Procedures(List<String> procedureNameList, TreeVO parent, TreeVO root) {
         return getTreeVOLevel3(procedureNameList, parent, root, LEVEL_3_PROCEDURE_ID);
     }
 

@@ -9,6 +9,8 @@ public class DatabaseConstant {
     private DatabaseConstant() {
     }
 
+    public static final String DATABASE_USE = "use %s;";
+
     /**
      * 创建数据库
      * <p>

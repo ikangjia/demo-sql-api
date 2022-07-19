@@ -11,6 +11,14 @@ public class TableSelectConstant {
      * 查询指定库下所有表
      * 注意：若要使用 show tables;，需要先进行 use database_name; 操作
      */
-    public static final String table_show_1 = "select * from information_schema.tables where table_schema = %s;";
+    public static final String table_show_1 = """
+            select table_name as tableName
+            from
+                information_schema.tables
+            where
+                table_type = 'BASE TABLE'
+                and\s
+                table_schema = '%s'
+            """;
     public static final String table_show_2 = "show tables;";
 }
