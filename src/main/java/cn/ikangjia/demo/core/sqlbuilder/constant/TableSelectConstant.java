@@ -17,7 +17,7 @@ public class TableSelectConstant {
                 information_schema.tables
             where
                 table_type = 'BASE TABLE'
-                and\s
+                and
                 table_schema = '%s'
             """;
     public static final String table_show_2 = "show tables;";

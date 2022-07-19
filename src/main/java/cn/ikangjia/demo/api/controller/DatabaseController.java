@@ -5,10 +5,7 @@ import cn.ikangjia.demo.api.model.vo.TreeVO;
 import cn.ikangjia.demo.api.rest.ResultVO;
 import cn.ikangjia.demo.service.DatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,8 +36,8 @@ public class DatabaseController {
                 .orElseThrow();
     }
 
-    @PostMapping("/tree/level3/t")
-    public ResultVO<List<TreeVO>> listTreeLevel3(TreeLevel3DTO treeLevel3DTO) {
+    @PostMapping("/tree/level3")
+    public ResultVO<List<TreeVO>> listTreeLevel3(@RequestBody TreeLevel3DTO treeLevel3DTO) {
         return Optional.of(databaseService.listTreeLevel3(treeLevel3DTO))
                 .map(ResultVO::success)
                 .orElseThrow();

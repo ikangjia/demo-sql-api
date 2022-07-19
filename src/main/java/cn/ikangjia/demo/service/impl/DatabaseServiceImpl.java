@@ -5,6 +5,7 @@ import cn.ikangjia.demo.api.model.vo.TreeVO;
 import cn.ikangjia.demo.core.entity.DataSourceEntity;
 import cn.ikangjia.demo.core.entity.DatabaseEntity;
 import cn.ikangjia.demo.core.mysql.MySQLDatabaseUtil;
+import cn.ikangjia.demo.core.mysql.MySQLTableUtil;
 import cn.ikangjia.demo.domain.mapper.DataSourceMapper;
 import cn.ikangjia.demo.service.DatabaseService;
 import cn.ikangjia.demo.util.TreeUtil;
@@ -49,9 +50,24 @@ public class DatabaseServiceImpl implements DatabaseService {
         Integer type = level3DTO.getType();
 
         DataSourceEntity dataSourceEntity = init(Long.valueOf(dataSourceId));
+        dataSourceEntity.setDbName(rootNode.getLabel());
 
+        List<TreeVO> treeLevel3;
 
-        return null;
+        switch (type) {
+            case 0:
+                List<String> tableNameList = MySQLTableUtil.listTables(dataSourceEntity);
+                treeLevel3 = TreeUtil.getTreeLevel3Tables(tableNameList, parentNode, rootNode);
+                break;
+            case 1:
+            case 2:
+            case 3:
+            default:
+                List<String> tableNameList1 = MySQLTableUtil.listTables(dataSourceEntity);
+                treeLevel3 = TreeUtil.getTreeLevel3Tables(tableNameList1, parentNode, rootNode);
+                break;
+        }
+        return treeLevel3;
     }
 
     @Override

@@ -135,6 +135,7 @@ public class TreeUtil {
             TreeVO treeVO = new TreeVO();
             treeVO.setParentId(parent.getId())
                     .setLevel(3)
+                    .setLeaf(true)
                     .setLabel(s)
                     .setIcon("el-icon-menu")
                     .setId(String.format(ex, root.getLabel(), s));

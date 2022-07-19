@@ -16,4 +16,6 @@ public class TreeVO {
     private String id;
     private String label;
     private String icon;
+
+    private boolean isLeaf;
 }
