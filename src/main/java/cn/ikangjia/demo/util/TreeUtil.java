@@ -49,7 +49,7 @@ public class TreeUtil {
             treeVO.setParentId(null)
                     .setLevel(1)
                     .setLabel(dbName)
-                    .setIcon("el-icon-menu")
+                    .setIcon("fa fa-database")
                     .setId(String.format(LEVEL_1_DB_ID, dbName));
             result.add(treeVO);
         });
@@ -68,14 +68,14 @@ public class TreeUtil {
         tablesTreeVO.setParentId(parent.getId())
                 .setLevel(2)
                 .setLabel("表")
-                .setIcon("el-icon-folder")
+                .setIcon("fa fa-folder-o")
                 .setId(String.format(LEVEL_2_TABLES_ID, parent.getLabel()));
 
         TreeVO viewsTreeVO = new TreeVO();
         viewsTreeVO.setParentId(parent.getId())
                 .setLevel(2)
                 .setLabel("视图")
-                .setIcon("el-icon-folder")
+                .setIcon("fa fa-folder-o")
                 .setId(String.format(LEVEL_2_VIEWS_ID, parent.getLabel()));
 
         TreeVO proceduresTreeVO = new TreeVO();
@@ -106,7 +106,7 @@ public class TreeUtil {
      * @return 结果
      */
     public static List<TreeVO> getTreeLevel3Tables(List<String> tableNameList, TreeVO parent, TreeVO root) {
-        return getTreeVOLevel3(tableNameList, parent, root, LEVEL_3_TABLE_ID);
+        return getTreeVOLevel3(tableNameList, parent, root, LEVEL_3_TABLE_ID, "fa fa-table");
     }
 
     /**
@@ -116,7 +116,7 @@ public class TreeUtil {
      * @return 结果
      */
     public static List<TreeVO> getTreeLevel3Views(List<String> viewNameList, TreeVO parent, TreeVO root) {
-        return getTreeVOLevel3(viewNameList, parent, root, LEVEL_3_VIEW_ID);
+        return getTreeVOLevel3(viewNameList, parent, root, LEVEL_3_VIEW_ID, "fa fa-columns");
     }
 
     /**
@@ -126,10 +126,20 @@ public class TreeUtil {
      * @return 结果
      */
     public static List<TreeVO> getTreeLevel3Procedures(List<String> procedureNameList, TreeVO parent, TreeVO root) {
-        return getTreeVOLevel3(procedureNameList, parent, root, LEVEL_3_PROCEDURE_ID);
+        return getTreeVOLevel3(procedureNameList, parent, root, LEVEL_3_PROCEDURE_ID, "fa fa-powerpoint-o");
     }
 
-    private static List<TreeVO> getTreeVOLevel3(List<String> sList, TreeVO parent, TreeVO root, String ex) {
+    /**
+     * 构造树的第三层级，即具体的表、视图、存储过程、函数
+     *
+     * @param functionNameList 函数名称列表
+     * @return 结果
+     */
+    public static List<TreeVO> getTreeLevel3Functions(List<String> functionNameList, TreeVO parent, TreeVO root) {
+        return getTreeVOLevel3(functionNameList, parent, root, LEVEL_3_FUNCTION_ID, "fa fa-gdp");
+    }
+
+    private static List<TreeVO> getTreeVOLevel3(List<String> sList, TreeVO parent, TreeVO root, String ex, String icon) {
         List<TreeVO> result = new ArrayList<>();
         sList.forEach(s -> {
             TreeVO treeVO = new TreeVO();
@@ -137,7 +147,7 @@ public class TreeUtil {
                     .setLevel(3)
                     .setLeaf(true)
                     .setLabel(s)
-                    .setIcon("el-icon-menu")
+                    .setIcon(icon)
                     .setId(String.format(ex, root.getLabel(), s));
             result.add(treeVO);
         });
